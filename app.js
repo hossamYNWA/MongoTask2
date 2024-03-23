@@ -82,6 +82,15 @@ mongoClient.connect(dburl, (err, client) => {
         .catch((error) => {
             console.error(error);
         });
+    // update first 4 players ages
+    collection
+        .updadeMany({}, { $inc: { age: 10 } }, { limit: 4 })
+        .then((result) => {
+            console.log(result.modifiedCount);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     // delete player with age 27
     collection.deleteMany({ age: 27 }).then((result) => {
         console.log(result.deletedCount);
